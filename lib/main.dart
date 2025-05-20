@@ -10,19 +10,24 @@ void main() async {
   await GetStorage.init();
   Get.put(ThemeService());
   runApp(const MyApp());
+
+  
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
+
   @override
+  
   Widget build(BuildContext context) {
+    
     return GetMaterialApp(
       theme: AppThemes.lightTheme,
       darkTheme: AppThemes.darkTheme,
       themeMode: ThemeService().theme,
       getPages: AppPages.routes,
-      initialRoute: Routes.LOGIN,
+      initialRoute: GetStorage().hasData('token') ? Routes.NAVBAR : Routes.LOGIN,
     );
   }
 }

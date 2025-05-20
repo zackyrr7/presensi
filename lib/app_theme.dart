@@ -7,6 +7,7 @@ class AppThemes {
     scaffoldBackgroundColor: Colors.blue[50],
     colorScheme: ColorScheme.light(
       primary: Colors.blue,
+      onPrimaryFixed: Colors.blue,
       secondary: Colors.white,
       surface: Colors.white, // Warna container saat light mode
       onSurface: Colors.black, // Warna teks di atas surface
@@ -50,6 +51,7 @@ class AppThemes {
     primaryColor: Colors.grey[900],
     scaffoldBackgroundColor: Colors.black,
     colorScheme: ColorScheme.dark(
+      onPrimaryFixed: Colors.white,
       primary: Colors.black38,
       secondary: Colors.grey[850]!,
       surface: Colors.black, // Warna container saat dark mode

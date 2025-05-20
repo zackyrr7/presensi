@@ -10,9 +10,21 @@ class LoginViews extends StatelessWidget {
   final LoginController loginController = Get.find<LoginController>();
 final themeService = Get.find<ThemeService>();
 
+  
+
 
   @override
+
+
+
   Widget build(BuildContext context) {
+  final args = Get.arguments;
+
+     if (args != null && args['message'] != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        Get.snackbar('Info', args['message']);
+      });
+    }
     return Scaffold(
       backgroundColor: Colors.blue,
       body: Stack(

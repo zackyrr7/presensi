@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gopresent/modules/home/views/home_view.dart';
 import 'package:gopresent/modules/navbar/views/test.dart';
+import 'package:gopresent/modules/riwayat/views/riwayat_view.dart';
 
 class MyNavbar extends StatelessWidget {
   MyNavbar({super.key});
@@ -10,7 +11,7 @@ class MyNavbar extends StatelessWidget {
 
   final List<Widget> _screens = [
      HomeView(),
-    const TestView(),
+     RiwayatView(),
     const SizedBox(), // kosong karena tombol tengah (Absen)
     const TestView(),
     const TestView(),
