@@ -1,11 +1,12 @@
 import 'dart:convert';
-import 'package:gopresent/constant.dart';
-import 'package:http/http.dart' as http;
+
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart';
+import 'package:gopresent/constant.dart';
+import 'package:http/http.dart' as http;
 
-class HomeService {
-  Future<Map<String, dynamic>> homeToday() async {
+class NotificationService {
+  Future<Map<String, dynamic>> GetNotification() async {
     try {
       final box = GetStorage();
       var token = box.read('token');
@@ -14,8 +15,8 @@ class HomeService {
         return {'success': false, 'message': 'Token tidak ditemukan'};
       }
 
-      var response = await http.post(
-        Uri.parse('$url/home/today'),
+      var response = await http.get(
+        Uri.parse('$url/notifikasi'),
         headers: {
           "Authorization": "Bearer $token",
           "Content-Type": "application/json",
@@ -24,10 +25,9 @@ class HomeService {
 
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
-        // print(data);
         return data;
       } else if (response.statusCode == 401) {
-        return {'succes': 401, 'message': 'Sesi telah habissss'};
+        return {'succes': 401, 'message': 'Sesi telah habis'};
       } else {
         return {'success': false, 'message': 'Terjadi kesalahan server'};
       }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gopresent/modules/auth/controllers/reset_controller.dart';
 import 'package:gopresent/modules/home/controllers/home_controller.dart';
 import 'package:gopresent/modules/home/widget/card_masuk_pulang.dart';
 import 'package:gopresent/modules/home/widget/home_bottomSheet.dart';
@@ -11,6 +12,7 @@ class HomeView extends StatelessWidget {
   HomeView({super.key});
   final themeService = Get.find<ThemeService>();
   final homeController = Get.find<HomeController>();
+  final resetController = Get.find<ResetController>();
 
   @override
   Widget build(BuildContext context) {
@@ -20,35 +22,48 @@ class HomeView extends StatelessWidget {
           children: [
             SizedBox(height: Get.height * 0.05),
             Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                IconButton(
-                  onPressed: () {
-                    // Mengubah tema ketika tombol ditekan
-                    themeService.switchTheme();
-                  },
-                  icon: Padding(
-                    padding: const EdgeInsets.only(right: 8.0),
-                    child: Obx(() {
-                      return Icon(
-                        size: 30,
-                        // Mengubah ikon sesuai dengan status tema
-                        themeService.isDarkMode.value
-                            ? Icons
-                                .light_mode // Ikon untuk tema gelap
-                            : Icons
-                                .dark_mode_outlined, // Ikon untuk tema terang
-                      );
-                    }),
+                Padding(
+                  padding: const EdgeInsets.only(left: 8.0),
+                  child: IconButton(
+                    onPressed: () {
+                      Get.toNamed('/notification');
+                    },
+                    icon: Icon(Icons.notifications, size: 30),
                   ),
                 ),
-                IconButton(
-                  onPressed: () {
-                    final box = GetStorage();
-                    box.remove('token');
-                    Get.offAndToNamed('/login');
-                  },
-                  icon: Icon(Icons.logout_rounded, size: 30),
+
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    IconButton(
+                      onPressed: () {
+                        // Mengubah tema ketika tombol ditekan
+                        themeService.switchTheme();
+                      },
+                      icon: Padding(
+                        padding: const EdgeInsets.only(right: 8.0),
+                        child: Obx(() {
+                          return Icon(
+                            size: 30,
+                            // Mengubah ikon sesuai dengan status tema
+                            themeService.isDarkMode.value
+                                ? Icons
+                                    .light_mode // Ikon untuk tema gelap
+                                : Icons
+                                    .dark_mode_outlined, // Ikon untuk tema terang
+                          );
+                        }),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () {
+                        resetController.resetHome();
+                      },
+                      icon: Icon(Icons.refresh, size: 30),
+                    ),
+                  ],
                 ),
               ],
             ),
@@ -146,7 +161,9 @@ class HomeView extends StatelessWidget {
                       Column(
                         children: [
                           GestureDetector(
-                            onTap: () {},
+                            onTap: () {
+                              Get.toNamed('/izin');
+                            },
                             child: SizedBox(
                               height: Get.height * 0.08,
                               width: Get.height * 0.08,
@@ -296,7 +313,6 @@ class HomeView extends StatelessWidget {
                       ],
                     ),
                   ),
-                  
                 ],
               ),
             ),

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gopresent/modules/home/views/home_view.dart';
 import 'package:gopresent/modules/navbar/views/test.dart';
+import 'package:gopresent/modules/profil/views/profil_view.dart';
 import 'package:gopresent/modules/riwayat/views/riwayat_view.dart';
 
 class MyNavbar extends StatelessWidget {
@@ -14,7 +15,7 @@ class MyNavbar extends StatelessWidget {
      RiwayatView(),
     const SizedBox(), // kosong karena tombol tengah (Absen)
     const TestView(),
-    const TestView(),
+    const ProfilView(),
   ];
 
   final List<String> _labels = ['Home', 'Riwayat', '', 'Lapker', 'Profil'];

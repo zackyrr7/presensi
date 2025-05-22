@@ -4,4 +4,7 @@ class Routes {
   static const LOGIN = '/login';
   static const NAVBAR = '/navbar';
   static const RIWAYAT = '/riwayat';
+  static const NOTIFICATIONN = '/notification';
+  static const NOTIFICATIONDETAIL = '/notification-detail';
+  static const IZIN = '/izin';
 }

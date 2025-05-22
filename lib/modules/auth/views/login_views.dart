@@ -8,19 +8,13 @@ class LoginViews extends StatelessWidget {
   LoginViews({super.key});
 
   final LoginController loginController = Get.find<LoginController>();
-final themeService = Get.find<ThemeService>();
-
-  
-
+  final themeService = Get.find<ThemeService>();
 
   @override
-
-
-
   Widget build(BuildContext context) {
-  final args = Get.arguments;
+    final args = Get.arguments;
 
-     if (args != null && args['message'] != null) {
+    if (args != null && args['message'] != null) {
       WidgetsBinding.instance.addPostFrameCallback((_) {
         Get.snackbar('Info', args['message']);
       });
@@ -40,7 +34,7 @@ final themeService = Get.find<ThemeService>();
                     child: Column(
                       children: [
                         SizedBox(height: Get.height * 0.05),
-                         Align(
+                        Align(
                           alignment: Alignment.centerRight,
                           child: IconButton(
                             onPressed: () {
@@ -49,16 +43,17 @@ final themeService = Get.find<ThemeService>();
                             },
                             icon: Padding(
                               padding: const EdgeInsets.only(right: 8.0),
-                              child: Obx((){
-                                return Icon(size: 30,
-                                // Mengubah ikon sesuai dengan status tema
-                                themeService.isDarkMode.value
-                                    ? Icons.light_mode // Ikon untuk tema gelap
-                                    : Icons.dark_mode_outlined, // Ikon untuk tema terang
-                              );
-                              })
-                              
-                              
+                              child: Obx(() {
+                                return Icon(
+                                  size: 30,
+                                  // Mengubah ikon sesuai dengan status tema
+                                  themeService.isDarkMode.value
+                                      ? Icons
+                                          .light_mode // Ikon untuk tema gelap
+                                      : Icons
+                                          .dark_mode_outlined, // Ikon untuk tema terang
+                                );
+                              }),
                             ),
                           ),
                         ),
@@ -110,7 +105,8 @@ final themeService = Get.find<ThemeService>();
                                 child: SizedBox(
                                   width: Get.width * 0.95,
                                   child: TextField(
-                                    controller: loginController.usernameController,
+                                    controller:
+                                        loginController.usernameController,
                                     decoration: const InputDecoration(
                                       // labelText: 'Username',
                                       hintText: 'Masukkan username',
@@ -141,53 +137,76 @@ final themeService = Get.find<ThemeService>();
                                 alignment: Alignment.center,
                                 child: SizedBox(
                                   width: Get.width * 0.95,
-                                  child: Obx((){
+                                  child: Obx(() {
                                     return TextField(
-                                      controller: loginController.passwordController,
-                                    obscureText:
-                                        !loginController
-                                            .isPasswordVisible
-                                            .value,
-                                    decoration: InputDecoration(
-                                      suffixIcon: IconButton(
-                                        onPressed: () {
-                                          loginController.togglePasswordVisibility();
-                                        },
-                                        icon: Icon(
-                                          loginController
-                                                  .isPasswordVisible
-                                                  .value
-                                              ? Icons.visibility
-                                              : Icons.visibility_off,
+                                      controller:
+                                          loginController.passwordController,
+                                      obscureText:
+                                          !loginController
+                                              .isPasswordVisible
+                                              .value,
+                                      decoration: InputDecoration(
+                                        suffixIcon: IconButton(
+                                          onPressed: () {
+                                            loginController
+                                                .togglePasswordVisibility();
+                                          },
+                                          icon: Icon(
+                                            loginController
+                                                    .isPasswordVisible
+                                                    .value
+                                                ? Icons.visibility
+                                                : Icons.visibility_off,
+                                          ),
                                         ),
+                                        // labelText: 'Username',
+                                        hintText: 'Masukkan Password',
                                       ),
-                                      // labelText: 'Username',
-                                      hintText: 'Masukkan Password',
-                                    ),
-                                  );
-                                  })
-                                  
-                                  
-                                  
+                                    );
+                                  }),
                                 ),
                               ),
                             ],
                           ),
                         ),
                         SizedBox(height: Get.height * 0.02),
-                        SizedBox(
-                          width: Get.width * 0.8,
-                          height: Get.height * 0.05,
-                          child: ElevatedButton(
-                            onPressed: () {
-                              loginController.isLoading.value ? null : loginController.login();
-                            },
-                            child: Text(
-                              'Login',
-                              style: AppTextStyles.buttonColor(context),
+                        Obx(
+                          () => SizedBox(
+                            width: Get.width * 0.8,
+                            height: Get.height * 0.05,
+                            child: ElevatedButton(
+                              onPressed:
+                                  loginController.isLoading.value
+                                      ? null // Disable saat loading
+                                      : () {
+                                        loginController.login();
+                                      },
+                              style: ElevatedButton.styleFrom(
+                                backgroundColor: Theme.of(context).primaryColor,
+                              ),
+                              child:
+                                  loginController.isLoading.value
+                                      ? SizedBox(
+                                        width: 20,
+                                        height: 20,
+                                        child: CircularProgressIndicator(
+                                          strokeWidth: 2,
+                                          valueColor:
+                                              AlwaysStoppedAnimation<Color>(
+                                                Colors.white,
+                                              ),
+                                        ),
+                                      )
+                                      : Text(
+                                        'Login',
+                                        style: AppTextStyles.buttonColor(
+                                          context,
+                                        ),
+                                      ),
                             ),
                           ),
                         ),
+
                         SizedBox(height: Get.height * 0.15),
                         Text(
                           'Copyright 2025',

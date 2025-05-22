@@ -34,4 +34,34 @@ class RiwayatService {
       return {'success': false, 'message': 'An error occurred: $e'};
     }
   }
+
+  Future<Map<String, dynamic>> riwayat() async {
+    try {
+      GetStorage box = GetStorage();
+      var token = box.read('token');
+
+      if (token == null) {
+        return {'success': false, 'message': 'Token tidak ditemukan'};
+      }
+
+      var response = await http.post(
+        Uri.parse('$url/history'),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+      );
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body);
+        // print(data);
+        return data;
+      } else if (response.statusCode == 401) {
+        return {'succes': 401, 'message': 'Sesi telah habissss'};
+      } else {
+        return {'success': false, 'message': 'Terjadi kesalahan server'};
+      }
+    } catch (e) {
+      return {'success': false, 'message': 'An error occurred: $e'};
+    }
+  }
 }
