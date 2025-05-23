@@ -7,4 +7,7 @@ class Routes {
   static const NOTIFICATIONN = '/notification';
   static const NOTIFICATIONDETAIL = '/notification-detail';
   static const IZIN = '/izin';
+  static const IZINDETAIL = '/izin-detail';
+  static const CREATEIZIN = '/izin-create';
+  static const TODAYABSEN = '/today-absen';
 }

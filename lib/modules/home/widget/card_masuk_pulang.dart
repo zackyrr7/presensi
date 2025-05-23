@@ -3,17 +3,9 @@ import 'package:get/get.dart';
 import 'package:gopresent/modules/home/controllers/home_controller.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 
-
 class CardMasukPulang extends StatelessWidget {
-   CardMasukPulang({
-    super.key,
-    
-  });
+  CardMasukPulang({super.key});
   final HomeController homeController = Get.find<HomeController>();
-
- 
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +27,7 @@ class CardMasukPulang extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(20, 20, 0, 0),
                     child: LoadingAnimationWidget.staggeredDotsWave(
-                      color:
-                          Theme.of(context).colorScheme.onPrimaryFixed,
+                      color: Theme.of(context).colorScheme.onPrimaryFixed,
                       size: 20,
                     ),
                   ),
@@ -50,10 +41,7 @@ class CardMasukPulang extends StatelessWidget {
                     homeController.tanggal.string,
                     overflow: TextOverflow.ellipsis,
                     maxLines: 1,
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.bold,
-                    ),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
                   ),
                 ),
               );
@@ -71,15 +59,14 @@ class CardMasukPulang extends StatelessWidget {
                       width: Get.width * 0.4,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color:
-                            Theme.of(context).scaffoldBackgroundColor,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('Masuk', style: TextStyle(fontSize: 15)),
-                          SizedBox(height: 5,),
+                          SizedBox(height: 5),
                           Text(
                             homeController.jamMasuk.string,
                             style: TextStyle(
@@ -87,19 +74,23 @@ class CardMasukPulang extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(height: 5),
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Theme.of(context).primaryColor,
+                              color:
+                                  homeController.statusMasuk.string ==
+                                          'Sudah Absen'
+                                      ? Colors
+                                          .green // 🔴 Warna merah jika sudah absen
+                                      : Colors
+                                          .blue, // ✅ Warna hijau jika belum absen
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 homeController.statusMasuk.string,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),
@@ -109,7 +100,7 @@ class CardMasukPulang extends StatelessWidget {
                   }
                 }),
                 //jam pulang
-               Obx(() {
+                Obx(() {
                   if (homeController.isLoading.value) {
                     return Center(child: CircularProgressIndicator());
                   } else {
@@ -118,15 +109,14 @@ class CardMasukPulang extends StatelessWidget {
                       width: Get.width * 0.4,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        color:
-                            Theme.of(context).scaffoldBackgroundColor,
+                        color: Theme.of(context).scaffoldBackgroundColor,
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.center,
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           Text('Pulang', style: TextStyle(fontSize: 15)),
-                          SizedBox(height: 5,),
+                          SizedBox(height: 5),
                           Text(
                             homeController.jamPulang.string,
                             style: TextStyle(
@@ -134,19 +124,24 @@ class CardMasukPulang extends StatelessWidget {
                               fontSize: 16,
                             ),
                           ),
-                          SizedBox(height: 5,),
+                          SizedBox(height: 5),
                           Container(
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(20),
-                              color: Theme.of(context).primaryColor,
+                              color:
+                                  homeController.statusPulang.string ==
+                                          'Sudah Absen'
+                                      ? Colors
+                                          .green 
+                                      : Colors
+                                          .blue, 
+                            
                             ),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 homeController.statusPulang.string,
-                                style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                ),
+                                style: TextStyle(fontWeight: FontWeight.bold),
                               ),
                             ),
                           ),

@@ -10,12 +10,13 @@ class AppThemes {
       onPrimaryFixed: Colors.blue,
       secondary: Colors.white,
       surface: Colors.white, // Warna container saat light mode
-      onSurface: Colors.black, // Warna teks di atas surface
+      onSurface: Colors.black,
+      onPrimary: Colors.white,
     ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(color: Colors.white),
       titleSmall: const TextStyle(color: Colors.blueGrey),
-      bodySmall: TextStyle(color: Colors.blue[50]!),
+      bodySmall: TextStyle(color: Colors.blueAccent),
       bodyMedium: const TextStyle(color: Colors.black),
       bodyLarge: const TextStyle(color: Colors.black),
     ),
@@ -56,11 +57,12 @@ class AppThemes {
       secondary: Colors.grey[850]!,
       surface: Colors.black, // Warna container saat dark mode
       onSurface: Colors.white, // Warna teks di atas surface
+      onPrimary: Colors.grey[850]!,
     ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(color: Colors.black),
       titleSmall: const TextStyle(color: Colors.white),
-      bodySmall: TextStyle(color: Colors.blue[50]!),
+      bodySmall: TextStyle(color: Colors.white),
       bodyMedium: const TextStyle(color: Colors.white),
       bodyLarge: const TextStyle(color: Colors.white),
     ),
