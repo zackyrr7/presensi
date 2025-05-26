@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gopresent/modules/auth/controllers/reset_controller.dart';
 import 'package:gopresent/modules/home/model/today_model.dart';
 import 'package:gopresent/services/home_service.dart';
 import 'package:gopresent/services/login_service.dart';
 import 'package:get_storage/get_storage.dart';
 
 class HomeController extends GetxController {
+  final ResetController resetController = Get.find<ResetController>();
   var isLoading = false.obs;
   var isLoading2 = false.obs;
   final HomeService _homeToday = HomeService();
@@ -42,17 +44,15 @@ class HomeController extends GetxController {
         } else {
           statusPulang.value = 'Sudah Absen';
         }
-      } else if (result['succes'] == 401) {
+      } else if (result['success'] == 401) {
         Get.defaultDialog(
-          title: 'Sesi Telah Habisss',
+          title: 'Sesi Telah Habis',
           middleText: 'Login Kembali',
           textConfirm: 'Ok',
           confirmTextColor:
               Get.theme.textTheme.bodyMedium?.color ?? Colors.black,
           onConfirm: () {
-            final box = GetStorage();
-            box.remove('token');
-            Get.offAndToNamed('/login');
+            resetController.deleteSession();
           },
         );
       } else {
@@ -77,17 +77,15 @@ class HomeController extends GetxController {
 
       if (result['status'] == true) {
         listAbsensToday.value = ListAbsens.fromJsonList(result['data']);
-      } else if (result['succes'] == 401) {
+      } else if (result['success'] == 401) {
         Get.defaultDialog(
-          title: 'Sesi Telah Habisss',
+          title: 'Sesi Telah Habis',
           middleText: 'Login Kembali',
           textConfirm: 'Ok',
           confirmTextColor:
               Get.theme.textTheme.bodyMedium?.color ?? Colors.black,
           onConfirm: () {
-            final box = GetStorage();
-            box.remove('token');
-            Get.offAndToNamed('/login');
+          resetController.deleteSession();
           },
         );
       } else {

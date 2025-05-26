@@ -8,9 +8,9 @@ import 'package:gopresent/modules/riwayat/controller/riwayat_hitung_controller.d
 class Homebinding extends Bindings {
   @override
   void dependencies() {
+    Get.put<ResetController>((ResetController()));
     Get.put<HomeController>((HomeController()));
     Get.put<RiwayatHitungController>((RiwayatHitungController()));
     Get.put<NotificationController>((NotificationController()));
-    Get.put<ResetController>((ResetController()));
   }
 }

@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:gopresent/bindings/AuthBinding.dart';
 import 'package:gopresent/bindings/HomeBinding.dart';
 import 'package:gopresent/bindings/IzinBinding.dart';
+import 'package:gopresent/bindings/SakitBinding.dart';
 import 'package:gopresent/modules/auth/controllers/login_controller.dart';
 import 'package:gopresent/modules/auth/views/login_views.dart';
 import 'package:gopresent/modules/home/views/notification_detail.dart';
@@ -13,6 +14,9 @@ import 'package:gopresent/modules/izin/view/izin_detail_view.dart';
 import 'package:gopresent/modules/izin/view/izin_view.dart';
 import 'package:gopresent/modules/navbar/views/navbar_view.dart';
 import 'package:gopresent/modules/riwayat/views/riwayat_view.dart';
+import 'package:gopresent/modules/sakit/view/create_sakit_view.dart';
+import 'package:gopresent/modules/sakit/view/detail_sakit_view.dart';
+import 'package:gopresent/modules/sakit/view/sakit_view.dart';
 
 part 'app_routes.dart';
 
@@ -38,5 +42,13 @@ class AppPages {
     GetPage(name: Routes.IZINDETAIL, page: () => IzinDetailView()),
     GetPage(name: Routes.TODAYABSEN, page: () => TodayAbsenView()),
     GetPage(name: Routes.CREATEIZIN, page: () => CreateIzinView()),
+    //sakit
+    GetPage(
+      name: Routes.SAKIT,
+      page: () => SakitView(),
+      binding: Sakitbinding(),
+    ),
+    GetPage(name: Routes.SAKITDETAIL, page: () => DetailSakitView()),
+    GetPage(name: Routes.SAKITCREATE, page: () => CreateSakitView()),
   ];
 }

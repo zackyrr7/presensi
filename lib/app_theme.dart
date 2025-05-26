@@ -12,6 +12,7 @@ class AppThemes {
       surface: Colors.white, // Warna container saat light mode
       onSurface: Colors.black,
       onPrimary: Colors.white,
+      onSecondary: Colors.blue,
     ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(color: Colors.white),
@@ -58,6 +59,7 @@ class AppThemes {
       surface: Colors.black, // Warna container saat dark mode
       onSurface: Colors.white, // Warna teks di atas surface
       onPrimary: Colors.grey[850]!,
+      onSecondary: Colors.white,
     ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(color: Colors.black),

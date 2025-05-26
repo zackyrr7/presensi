@@ -10,4 +10,7 @@ class Routes {
   static const IZINDETAIL = '/izin-detail';
   static const CREATEIZIN = '/izin-create';
   static const TODAYABSEN = '/today-absen';
+  static const SAKIT = '/sakit';
+  static const SAKITDETAIL = '/sakit-detail';
+  static const SAKITCREATE = '/sakit-create';
 }

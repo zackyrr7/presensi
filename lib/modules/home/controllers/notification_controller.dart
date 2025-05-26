@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:gopresent/modules/auth/controllers/reset_controller.dart';
 import 'package:gopresent/modules/home/model/notification_model.dart';
 import 'package:gopresent/modules/riwayat/model/riwayat_model.dart';
 import 'package:gopresent/services/notification_service.dart';
@@ -9,6 +10,7 @@ class NotificationController extends GetxController {
   var isLoading = false.obs;
   final NotificationService _notificationService = NotificationService();
   var listnotification = <NotificationModel>[].obs;
+  final ResetController resetController = Get.find<ResetController>();
 
   Future<void> notification() async {
     isLoading.value = true;
@@ -26,9 +28,7 @@ class NotificationController extends GetxController {
           confirmTextColor:
               Get.theme.textTheme.bodyMedium?.color ?? Colors.black,
           onConfirm: () {
-            final box = GetStorage();
-            box.remove('token');
-            Get.offAndToNamed('/login');
+            resetController.deleteSession();
           },
         );
       } else {
