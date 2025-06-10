@@ -45,6 +45,30 @@ class CutiController extends GetxController {
       firstDate: DateTime(2000),
       lastDate: DateTime(2100),
       locale: const Locale("id", "ID"),
+      builder: (BuildContext context, Widget? child) {
+        return Theme(
+          data:
+              Theme.of(context).brightness == Brightness.dark
+                  ? ThemeData.dark().copyWith(
+                    colorScheme: ColorScheme.dark(
+                      primary: Colors.blue, // Warna "OK"
+                      onPrimary: Colors.white, // Warna teks "OK"
+                      surface: Colors.grey[900]!,
+                      onSurface: Colors.white,
+                    ),
+                    dialogBackgroundColor: Colors.grey[850],
+                  )
+                  : ThemeData.light().copyWith(
+                    colorScheme: ColorScheme.light(
+                      primary: Colors.blue,
+                      onPrimary: Colors.white,
+                      surface: Colors.white,
+                      onSurface: Colors.black,
+                    ),
+                  ),
+          child: child!,
+        );
+      },
     );
 
     if (picked != null) {
@@ -63,7 +87,6 @@ class CutiController extends GetxController {
 
     try {
       var result = await _cutiService.GetCuti();
-      
 
       if (result['status'] == true) {
         modelCuti.value = ModelCuti.fromJsonList(result['data']);
@@ -142,7 +165,7 @@ class CutiController extends GetxController {
         keterangan,
         jenis2.value,
       );
-      print(result['success']);
+
       if (result['status'] == true) {
         Get.snackbar(
           'Berhasil',
@@ -190,7 +213,7 @@ class CutiController extends GetxController {
       if (result['status'] == true) {
         Get.snackbar(
           'Berhasil',
-          result['message'] ?? 'Data berhasil disimpan',
+          result['message'] ?? 'Data berhasil dihapus',
           snackPosition: SnackPosition.BOTTOM,
         );
         getCuti();

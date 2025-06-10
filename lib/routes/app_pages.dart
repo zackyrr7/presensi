@@ -20,6 +20,7 @@ import 'package:gopresent/modules/home/views/today_absen.dart';
 import 'package:gopresent/modules/izin/view/create_izin_view.dart';
 import 'package:gopresent/modules/izin/view/izin_detail_view.dart';
 import 'package:gopresent/modules/izin/view/izin_view.dart';
+import 'package:gopresent/modules/lembur/view/create_lembur_view.dart';
 import 'package:gopresent/modules/lembur/view/lembur_detail_view.dart';
 import 'package:gopresent/modules/lembur/view/lembur_view.dart';
 import 'package:gopresent/modules/navbar/views/navbar_view.dart';
@@ -82,5 +83,6 @@ class AppPages {
       binding: Lemburbinding(),
     ),
     GetPage(name: Routes.LEMBURDETAIL, page: () => LemburDetailView()),
+    GetPage(name: Routes.CREATELEMBUR, page: () => CreateLemburView()),
   ];
 }

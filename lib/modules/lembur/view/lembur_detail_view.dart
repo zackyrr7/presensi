@@ -3,6 +3,7 @@ import 'package:get/get.dart';
 import 'package:gopresent/modules/lembur/controller/lembur_controller.dart';
 import 'package:gopresent/modules/lembur/model/lembur_model.dart';
 import 'package:gopresent/modules/lembur/widget/bottom_sheet_ubah_status.dart';
+import 'package:gopresent/modules/lembur/widget/create_bottom_sheet_lembur.dart';
 
 class LemburDetailView extends StatelessWidget {
   LemburDetailView({super.key});
@@ -128,19 +129,25 @@ class LemburDetailView extends StatelessWidget {
                                     style: TextStyle(
                                       color: statusInfo['color'],
                                       fontSize: 16,
+                                      fontWeight: FontWeight.bold,
                                     ),
                                   ),
                                 ],
                               ),
                             ),
-                            IconButton(
-                              onPressed: () {
-                                Get.bottomSheet(
-                                 BottomSheetUbahStatus(index: index, detail: detail),
-                                );
-                              },
-                              icon: Icon(Icons.edit),
-                            ),
+                            detail.status != 3
+                                ? IconButton(
+                                  onPressed: () {
+                                    Get.bottomSheet(
+                                      BottomSheetUbahStatus(
+                                        index: index,
+                                        detail: detail,
+                                      ),
+                                    );
+                                  },
+                                  icon: Icon(Icons.edit),
+                                )
+                                : Container(),
                           ],
                         ),
                       );
@@ -153,11 +160,12 @@ class LemburDetailView extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        backgroundColor: Theme.of(context).colorScheme.onPrimaryFixed,
+        onPressed: () {
+          Get.bottomSheet(CreateBottomSheetLembur());
+        },
         child: Icon(Icons.add),
       ),
     );
   }
 }
-
-

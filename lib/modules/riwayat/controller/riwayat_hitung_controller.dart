@@ -28,7 +28,7 @@ class RiwayatHitungController extends GetxController {
         telat.value = data['telat'] ?? 0;
         izin.value = data['izin'] ?? 0;
         sakit.value = data['sakit'] ?? 0;
-      } else if (result['succes'] == 401) {
+      } else if (result['success'] == 401) {
         Get.defaultDialog(
           title: 'Sesi Telah Habisss',
           middleText: 'Login Kembali',

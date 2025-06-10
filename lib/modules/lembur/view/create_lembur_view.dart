@@ -1,43 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:get/get_instance/src/extension_instance.dart';
-import 'package:get/route_manager.dart';
-import 'package:get/state_manager.dart';
-import 'package:gopresent/modules/cuti/controller/cuti_controller.dart';
 import 'package:gopresent/modules/home/controllers/home_controller.dart';
-import 'package:gopresent/modules/izin/controller/izin_controller.dart';
-import 'package:open_file/open_file.dart';
+import 'package:gopresent/modules/lembur/controller/lembur_controller.dart';
+import 'package:get/get.dart';
 
-class CreateCutiView extends StatelessWidget {
-  CreateCutiView({super.key});
-  final namaController = Get.find<HomeController>();
-  final CutiController cutiController = Get.find<CutiController>();
+class CreateLemburView extends StatelessWidget {
+  CreateLemburView({super.key});
+  final LemburController lemburController = Get.find<LemburController>();
+  final HomeController namaController = Get.find<HomeController>();
 
   final List<String> options = [
-    "Tahunan",
-    "Melahirkan",
-    "Menikah",
-    "Di Luar Tanggungan",
+    "Dalam Pengerjaan",
+    "Dalam Pengecekan",
+    "Selesai",
+    "Belum Selesai",
   ];
 
   Future<void> showPilihanDialog() async {
-    final result = await Get.defaultDialog<String>(
-      title: "Pilih Jenis Cuti",
-      content: Column(
-        children:
-            options.map((item) {
-              return ListTile(
-                title: Text(item),
-                onTap: () {
-                  Get.back(result: item); // Kembalikan nilai
-                },
-              );
-            }).toList(),
+    final result = await Get.dialog<String>(
+      AlertDialog(
+        title: const Text("Pilih Status Pekerjaan"),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children:
+              options.map((item) {
+                return ListTile(
+                  title: Text(item),
+                  onTap: () {
+                    Get.back(result: item); // Kembalikan nilai string item
+                  },
+                );
+              }).toList(),
+        ),
       ),
-      radius: 10,
     );
 
     if (result != null) {
-      cutiController.pilihanController.text = result;
+      lemburController.pilihanController.text = result;
     }
   }
 
@@ -47,7 +46,7 @@ class CreateCutiView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          'Pengajuan Cuti',
+          'Tambah Lembur',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -68,7 +67,7 @@ class CreateCutiView extends StatelessWidget {
             Container(
               height: Get.height * 0.45,
               width: Get.width,
-              child: Image.asset('assets/image/cuti.png', fit: BoxFit.cover),
+              child: Image.asset('assets/image/lembur.jpg', fit: BoxFit.cover),
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -84,17 +83,16 @@ class CreateCutiView extends StatelessWidget {
             SizedBox(
               width: Get.width * 0.95,
               child: TextFormField(
-                controller: cutiController.pilihanController,
                 style: TextStyle(color: Colors.black),
                 readOnly: true,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
-                  labelText: 'Jenis Cuti',
+                  labelText: 'Tanggal',
                   labelStyle: TextStyle(color: Colors.black38),
+                  suffixIcon: Icon(Icons.calendar_today),
                 ),
-                onTap: () {
-                  showPilihanDialog();
-                },
+                onTap: () => lemburController.pickDate(context),
+                controller: lemburController.tanggalController,
               ),
             ),
             SizedBox(height: 20),
@@ -105,12 +103,12 @@ class CreateCutiView extends StatelessWidget {
                 readOnly: true,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
-                  labelText: 'Tanggal Awal',
+                  labelText: 'Mulai',
                   labelStyle: TextStyle(color: Colors.black38),
                   suffixIcon: Icon(Icons.calendar_today),
                 ),
-                onTap: () => cutiController.pickDate(context, true),
-                controller: cutiController.tanggalAwalController,
+                onTap: () => lemburController.pickDateTimeMulai(context),
+                controller: lemburController.mulaiController,
               ),
             ),
             SizedBox(height: 20),
@@ -121,15 +119,16 @@ class CreateCutiView extends StatelessWidget {
                 readOnly: true,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
-                  labelText: 'Tanggal Akhir',
+                  labelText: 'Selesai',
                   labelStyle: TextStyle(color: Colors.black38),
                   suffixIcon: Icon(Icons.calendar_today),
                 ),
-                onTap: () => cutiController.pickDate(context, false),
-                controller: cutiController.tanggalAkhirController,
+                onTap: () => lemburController.pickDateTimeSelesai(context),
+                controller: lemburController.selesaiController,
               ),
             ),
             SizedBox(height: 20),
+
             SizedBox(
               width: Get.width * 0.95,
               child: TextField(
@@ -137,15 +136,32 @@ class CreateCutiView extends StatelessWidget {
                 style: TextStyle(color: Colors.black),
                 decoration: InputDecoration(
                   fillColor: Colors.white,
-                  labelText: 'Keterangan',
+                  labelText: 'Uraian Pekerjaan',
                   labelStyle: TextStyle(color: Colors.black38),
-                  hintText: 'Masukkan Keterangan',
+                  hintText: 'Masukkan Uraian Pekerjaan',
                 ),
-                controller: cutiController.keteranganController,
+                controller: lemburController.keteranganController,
               ),
             ),
-            SizedBox(height: 20),
 
+            // SizedBox(height: 20),
+            SizedBox(height: 20),
+            SizedBox(
+              width: Get.width * 0.95,
+              child: TextFormField(
+                controller: lemburController.pilihanController,
+                style: TextStyle(color: Colors.black),
+                readOnly: true,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  labelText: 'Status Pekerjaan',
+                  labelStyle: TextStyle(color: Colors.black38),
+                ),
+                onTap: () {
+                  showPilihanDialog();
+                },
+              ),
+            ),
             SizedBox(height: 200),
           ],
         ),
@@ -159,10 +175,10 @@ class CreateCutiView extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           onPressed: () {
-            cutiController.simpanCuti();
+            lemburController.postLembur();
           },
           child: Obx(() {
-            if (cutiController.isLoading.value) {
+            if (lemburController.isLoading.value) {
               return CircularProgressIndicator();
             } else {
               return Text('Simpan', style: TextStyle(fontSize: 15));

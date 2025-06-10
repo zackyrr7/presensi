@@ -59,6 +59,7 @@ class CreateIzinView extends StatelessWidget {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   labelText: 'Tanggal Awal',
+                  labelStyle: TextStyle(color: Colors.black38),
                   suffixIcon: Icon(Icons.calendar_today),
                 ),
                 onTap: () => izinController.pickDate(context, true),
@@ -74,6 +75,7 @@ class CreateIzinView extends StatelessWidget {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   labelText: 'Tanggal Akhir',
+                  labelStyle: TextStyle(color: Colors.black38),
                   suffixIcon: Icon(Icons.calendar_today),
                 ),
                 onTap: () => izinController.pickDate(context, false),
@@ -89,6 +91,7 @@ class CreateIzinView extends StatelessWidget {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   labelText: 'Keterangan',
+                  labelStyle: TextStyle(color: Colors.black38),
                   hintText: 'Masukkan Keterangan',
                 ),
                 controller: izinController.keteranganController,
@@ -103,18 +106,19 @@ class CreateIzinView extends StatelessWidget {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   labelText: 'File PDF (Opsional)',
+                  labelStyle: TextStyle(color: Colors.black38),
                   suffixIcon: Row(
                     mainAxisSize:
                         MainAxisSize.min, // supaya Row tidak memenuhi lebar
                     children: [
                       IconButton(
-                        icon: Icon(Icons.attach_file),
+                        icon: Icon(Icons.attach_file, color: Colors.black),
                         onPressed: () async {
                           await izinController.pickPdf();
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.visibility),
+                        icon: Icon(Icons.visibility, color: Colors.black),
                         onPressed: () async {
                           final file = izinController.selectedFile.value;
                           if (file != null) {
@@ -132,7 +136,7 @@ class CreateIzinView extends StatelessWidget {
                         onPressed: () {
                           izinController.hapusFile();
                         },
-                        icon: Icon(Icons.delete),
+                        icon: Icon(Icons.delete, color: Colors.black),
                       ),
                     ],
                   ),
@@ -150,6 +154,7 @@ class CreateIzinView extends StatelessWidget {
         width: 150,
         height: 50,
         child: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.onPrimaryFixed,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(20),
           ),

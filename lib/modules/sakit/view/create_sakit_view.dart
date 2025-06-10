@@ -60,6 +60,7 @@ class CreateSakitView extends StatelessWidget {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   labelText: 'Tanggal',
+                  labelStyle: TextStyle(color: Colors.black38),
                   suffixIcon: Icon(Icons.calendar_today),
                 ),
                 onTap: () => sakitController.pickDate(context, true),
@@ -76,6 +77,7 @@ class CreateSakitView extends StatelessWidget {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   labelText: 'Keterangan',
+                   labelStyle: TextStyle(color: Colors.black38),
                   hintText: 'Masukkan Keterangan',
                 ),
                 controller: sakitController.keteranganController,
@@ -90,18 +92,19 @@ class CreateSakitView extends StatelessWidget {
                 decoration: InputDecoration(
                   fillColor: Colors.white,
                   labelText: 'File PDF (Opsional)',
+                   labelStyle: TextStyle(color: Colors.black38),
                   suffixIcon: Row(
                     mainAxisSize:
                         MainAxisSize.min, // supaya Row tidak memenuhi lebar
                     children: [
                       IconButton(
-                        icon: Icon(Icons.attach_file),
+                        icon: Icon(Icons.attach_file,color: Colors.black,),
                         onPressed: () async {
                           await sakitController.pickPdf();
                         },
                       ),
                       IconButton(
-                        icon: Icon(Icons.visibility),
+                        icon: Icon(Icons.visibility,color: Colors.black,),
                         onPressed: () async {
                           final file = sakitController.selectedFile.value;
                           if (file != null) {
@@ -116,10 +119,11 @@ class CreateSakitView extends StatelessWidget {
                         },
                       ),
                       IconButton(
+                       
                         onPressed: () {
                           sakitController.hapusFile();
                         },
-                        icon: Icon(Icons.delete),
+                        icon: Icon(Icons.delete,color: Colors.black,),
                       ),
                     ],
                   ),

@@ -20,6 +20,7 @@ class Routes {
   static const CREATEABSEN = '/absen-create';
   static const LEMBUR = '/lembur';
   static const LEMBURDETAIL = '/lembur-detail';
+  static const CREATELEMBUR = '/lembur-create';
 
 
 }

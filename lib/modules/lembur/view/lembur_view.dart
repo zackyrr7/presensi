@@ -59,7 +59,9 @@ class LemburView extends StatelessWidget {
         }
       }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Get.toNamed('lembur-create');
+        },
         backgroundColor: Theme.of(context).colorScheme.onPrimaryFixed,
         child: Icon(Icons.add),
       ),

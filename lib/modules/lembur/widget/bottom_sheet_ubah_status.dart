@@ -59,6 +59,7 @@ class BottomSheetUbahStatus extends StatelessWidget {
               maxLines: 3,
               decoration: InputDecoration(
                 hintText: 'Masukkan uraian pekerjaan',
+                  labelStyle: TextStyle(color: Colors.black38),
                 border: OutlineInputBorder(),
               ),
             ),
@@ -98,7 +99,9 @@ class BottomSheetUbahStatus extends StatelessWidget {
                     ),
                   ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      lemburController.hapusLembur(detail?.id);
+                    },
                     child: Text('Hapus', style: TextStyle(color: Colors.white)),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.red,

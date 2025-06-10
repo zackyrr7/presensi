@@ -25,7 +25,7 @@ class LoginService {
         };
       }
     } catch (e) {
-      return {'succes': false, 'message': 'An error Occurred: $e'};
+      return {'success': false, 'message': 'An error Occurred: $e'};
     }
   }
 }
