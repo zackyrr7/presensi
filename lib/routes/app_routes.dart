@@ -13,4 +13,13 @@ class Routes {
   static const SAKIT = '/sakit';
   static const SAKITDETAIL = '/sakit-detail';
   static const SAKITCREATE = '/sakit-create';
+  static const CUTI = '/cuti';
+  static const CUTIDETAIL = '/cuti-detail';
+  static const CREATECUTI = '/cuti-create';
+  static const ABSEN = '/absen';
+  static const CREATEABSEN = '/absen-create';
+  static const LEMBUR = '/lembur';
+  static const LEMBURDETAIL = '/lembur-detail';
+
+
 }

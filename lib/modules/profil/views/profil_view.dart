@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
+import 'package:gopresent/modules/auth/controllers/reset_controller.dart';
 
 class ProfilView extends StatelessWidget {
-  const ProfilView({super.key});
+  ProfilView({super.key});
+  final ResetController resetController = Get.find<ResetController>();
 
   @override
   Widget build(BuildContext context) {
@@ -16,9 +18,7 @@ class ProfilView extends StatelessWidget {
             children: [
               IconButton(
                 onPressed: () {
-                  final box = GetStorage();
-                  box.remove('token');
-                  Get.offAndToNamed('/login');
+                  resetController.deleteSession();
                 },
                 icon: Icon(Icons.logout),
               ),

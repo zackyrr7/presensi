@@ -5,9 +5,10 @@ import 'package:gopresent/constant.dart';
 import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'dart:convert';
+import 'package:http_parser/http_parser.dart';
 
-class IzinService {
-  Future<Map<String, dynamic>> GetIzin() async {
+class AbsenService {
+  Future<Map<String, dynamic>> cekInOut() async {
     try {
       final box = GetStorage();
       var token = box.read('token');
@@ -17,7 +18,7 @@ class IzinService {
       }
 
       var response = await http.post(
-        Uri.parse('$url/izin/list-data'),
+        Uri.parse('$url/absensi/cekinout'),
         headers: {
           "Authorization": "Bearer $token",
           "Content-Type": "application/json",
@@ -37,11 +38,10 @@ class IzinService {
     }
   }
 
-  Future<Map<String, dynamic>> postIzin(
-    String tanggalAwal,
-    String tanggalAkhir,
-    String keterangan,
-    File? file, // ubah jadi nullable
+  Future<Map<String, dynamic>> postAbsen(
+    String clock_type,
+    String location,
+    File? file,
   ) async {
     try {
       final box = GetStorage();
@@ -53,36 +53,45 @@ class IzinService {
 
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('$url/izin/simpan-izin'),
+        Uri.parse('$url/absensi/simpan'),
       );
+
 
       request.headers['Authorization'] = 'Bearer $token';
 
-      request.fields['tanggalAwal'] = tanggalAwal;
-      request.fields['tanggalAkhir'] = tanggalAkhir;
-      request.fields['keterangan'] = keterangan;
+      request.fields['clock_type'] = clock_type;
+      request.fields['location'] = location;
 
-      // Tambahkan file jika ada
-      if (file != null) {
-        request.files.add(await http.MultipartFile.fromPath('file', file.path));
+      if (file != null && await file.exists()) {
+        request.files.add(
+          await http.MultipartFile.fromPath(
+            'file', // ✅ sesuaikan dengan backend
+            file.path,
+            contentType: MediaType('image', 'jpeg'), // opsional
+          ),
+        );
       }
 
+      
       var streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);
-
+      
       if (response.statusCode == 200) {
         return json.decode(response.body);
       } else if (response.statusCode == 401) {
         return {'success': 401, 'message': 'Sesi telah habis'};
       } else {
-        return {'success': false, 'message': 'Terjadi kesalahan server'};
+        return {
+          'success': false,
+          'message': 'Terjadi kesalahan server: ${response.statusCode}',
+        };
       }
     } catch (e) {
       return {'success': false, 'message': 'Terjadi error: $e'};
     }
   }
 
-  Future<Map<String, dynamic>> hapusIzin(String id) async {
+  Future<Map<String, dynamic>> hapusCuti(int id) async {
     try {
       final box = GetStorage();
       var token = box.read('token');
@@ -93,12 +102,12 @@ class IzinService {
 
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('$url/izin/hapus-izin'),
+        Uri.parse('$url/cuti/hapus-cuti'),
       );
 
       request.headers['Authorization'] = 'Bearer $token';
 
-      request.fields['id'] = id;
+      request.fields['id'] = id.toString();
 
       var streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);

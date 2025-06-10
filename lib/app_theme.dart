@@ -13,6 +13,7 @@ class AppThemes {
       onSurface: Colors.black,
       onPrimary: Colors.white,
       onSecondary: Colors.blue,
+      onTertiary: Colors.black45
     ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(color: Colors.white),
@@ -60,6 +61,7 @@ class AppThemes {
       onSurface: Colors.white, // Warna teks di atas surface
       onPrimary: Colors.grey[850]!,
       onSecondary: Colors.white,
+        onTertiary: Colors.white
     ),
     textTheme: TextTheme(
       titleLarge: const TextStyle(color: Colors.black),

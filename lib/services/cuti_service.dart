@@ -6,8 +6,8 @@ import 'package:http/http.dart' as http;
 import 'package:get_storage/get_storage.dart';
 import 'dart:convert';
 
-class IzinService {
-  Future<Map<String, dynamic>> GetIzin() async {
+class CutiService {
+  Future<Map<String, dynamic>> GetCuti() async {
     try {
       final box = GetStorage();
       var token = box.read('token');
@@ -17,13 +17,14 @@ class IzinService {
       }
 
       var response = await http.post(
-        Uri.parse('$url/izin/list-data'),
+        Uri.parse('$url/cuti/list-data'),
         headers: {
           "Authorization": "Bearer $token",
           "Content-Type": "application/json",
         },
       );
 
+   
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
         return data;
@@ -37,12 +38,14 @@ class IzinService {
     }
   }
 
-  Future<Map<String, dynamic>> postIzin(
+  Future<Map<String, dynamic>> postCuti(
     String tanggalAwal,
     String tanggalAkhir,
     String keterangan,
-    File? file, // ubah jadi nullable
+    String jenis, // ubah jadi nullable
+    
   ) async {
+    
     try {
       final box = GetStorage();
       var token = box.read('token');
@@ -53,7 +56,7 @@ class IzinService {
 
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('$url/izin/simpan-izin'),
+        Uri.parse('$url/cuti/simpan-cuti'),
       );
 
       request.headers['Authorization'] = 'Bearer $token';
@@ -61,11 +64,10 @@ class IzinService {
       request.fields['tanggalAwal'] = tanggalAwal;
       request.fields['tanggalAkhir'] = tanggalAkhir;
       request.fields['keterangan'] = keterangan;
+      request.fields['jenis'] = jenis;
 
       // Tambahkan file jika ada
-      if (file != null) {
-        request.files.add(await http.MultipartFile.fromPath('file', file.path));
-      }
+     
 
       var streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);
@@ -82,7 +84,7 @@ class IzinService {
     }
   }
 
-  Future<Map<String, dynamic>> hapusIzin(String id) async {
+  Future<Map<String, dynamic>> hapusCuti(int id) async {
     try {
       final box = GetStorage();
       var token = box.read('token');
@@ -93,12 +95,12 @@ class IzinService {
 
       var request = http.MultipartRequest(
         'POST',
-        Uri.parse('$url/izin/hapus-izin'),
+        Uri.parse('$url/cuti/hapus-cuti'),
       );
 
       request.headers['Authorization'] = 'Bearer $token';
 
-      request.fields['id'] = id;
+      request.fields['id'] = id.toString();
 
       var streamedResponse = await request.send();
       var response = await http.Response.fromStream(streamedResponse);

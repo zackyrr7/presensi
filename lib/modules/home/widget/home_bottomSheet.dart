@@ -68,7 +68,9 @@ class HomeBottomSheet extends StatelessWidget {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed('/izin');
+                          },
                           child: SizedBox(
                             height:
                                 Get.height * 0.08,
@@ -86,7 +88,9 @@ class HomeBottomSheet extends StatelessWidget {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed('/sakit');
+                          },
                           child: SizedBox(
                             height:
                                 Get.height * 0.08,
@@ -104,7 +108,9 @@ class HomeBottomSheet extends StatelessWidget {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed('/cuti');
+                          },
                           child: SizedBox(
                             height:
                                 Get.height * 0.08,
@@ -219,14 +225,18 @@ class HomeBottomSheet extends StatelessWidget {
                               ),
                             );
                           },
-                          child: SizedBox(
-                            height:
-                                Get.height * 0.08,
-                            width:
-                                Get.height * 0.08,
-    
-                            child: Image.asset(
-                              "assets/icon/lembur.png",
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.toNamed('/lembur');
+                            },
+                            child: SizedBox(
+                              height:
+                                  Get.height * 0.08,
+                              width:
+                                  Get.height * 0.08,
+                              child: Image.asset(
+                                "assets/icon/lembur.png",
+                              ),
                             ),
                           ),
                         ),

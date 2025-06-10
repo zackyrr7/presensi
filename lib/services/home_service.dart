@@ -58,7 +58,7 @@ class HomeService {
      
         return data;
       } else if (response.statusCode == 401) {
-        return {'succes': 401, 'message': 'Sesi telah habissss'};
+        return {'success': 401, 'message': 'Sesi telah habissss'};
       } else {
         return {'success': false, 'message': 'Terjadi kesalahan server'};
       }

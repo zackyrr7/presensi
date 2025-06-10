@@ -2,15 +2,44 @@ import 'package:flutter/material.dart';
 import 'package:get/get_instance/src/extension_instance.dart';
 import 'package:get/route_manager.dart';
 import 'package:get/state_manager.dart';
+import 'package:gopresent/modules/cuti/controller/cuti_controller.dart';
 import 'package:gopresent/modules/home/controllers/home_controller.dart';
 import 'package:gopresent/modules/izin/controller/izin_controller.dart';
-import 'package:gopresent/modules/sakit/controller/sakit_controller.dart';
 import 'package:open_file/open_file.dart';
 
-class CreateSakitView extends StatelessWidget {
-  CreateSakitView({super.key});
+class CreateCutiView extends StatelessWidget {
+  CreateCutiView({super.key});
   final namaController = Get.find<HomeController>();
-  final sakitController = Get.find<SakitController>();
+  final CutiController cutiController = Get.find<CutiController>();
+
+  final List<String> options = [
+    "Tahunan",
+    "Melahirkan",
+    "Menikah",
+    "Di Luar Tanggungan",
+  ];
+
+  Future<void> showPilihanDialog() async {
+    final result = await Get.defaultDialog<String>(
+      title: "Pilih Jenis Cuti",
+      content: Column(
+        children:
+            options.map((item) {
+              return ListTile(
+                title: Text(item),
+                onTap: () {
+                  Get.back(result: item); // Kembalikan nilai
+                },
+              );
+            }).toList(),
+      ),
+      radius: 10,
+    );
+
+    if (result != null) {
+      cutiController.pilihanController.text = result;
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +47,7 @@ class CreateSakitView extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         title: Text(
-          'Pengajuan Sakit',
+          'Pengajuan Cuti',
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -39,7 +68,7 @@ class CreateSakitView extends StatelessWidget {
             Container(
               height: Get.height * 0.45,
               width: Get.width,
-              child: Image.asset('assets/image/sick.png', fit: BoxFit.cover),
+              child: Image.asset('assets/image/cuti.png', fit: BoxFit.cover),
             ),
             Align(
               alignment: Alignment.centerLeft,
@@ -55,30 +84,16 @@ class CreateSakitView extends StatelessWidget {
             SizedBox(
               width: Get.width * 0.95,
               child: TextFormField(
+                controller: cutiController.pilihanController,
                 style: TextStyle(color: Colors.black),
                 readOnly: true,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
-                  labelText: 'Tanggal',
-                  suffixIcon: Icon(Icons.calendar_today),
+                  labelText: 'Jenis Cuti',
                 ),
-                onTap: () => sakitController.pickDate(context, true),
-                controller: sakitController.tanggalAwalController,
-              ),
-            ),
-            SizedBox(height: 20),
-
-            SizedBox(
-              width: Get.width * 0.95,
-              child: TextField(
-                maxLines: 5,
-                style: TextStyle(color: Colors.black),
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  labelText: 'Keterangan',
-                  hintText: 'Masukkan Keterangan',
-                ),
-                controller: sakitController.keteranganController,
+                onTap: () {
+                  showPilihanDialog();
+                },
               ),
             ),
             SizedBox(height: 20),
@@ -89,45 +104,43 @@ class CreateSakitView extends StatelessWidget {
                 readOnly: true,
                 decoration: InputDecoration(
                   fillColor: Colors.white,
-                  labelText: 'File PDF (Opsional)',
-                  suffixIcon: Row(
-                    mainAxisSize:
-                        MainAxisSize.min, // supaya Row tidak memenuhi lebar
-                    children: [
-                      IconButton(
-                        icon: Icon(Icons.attach_file),
-                        onPressed: () async {
-                          await sakitController.pickPdf();
-                        },
-                      ),
-                      IconButton(
-                        icon: Icon(Icons.visibility),
-                        onPressed: () async {
-                          final file = sakitController.selectedFile.value;
-                          if (file != null) {
-                            await OpenFile.open(file.path);
-                          } else {
-                            Get.snackbar(
-                              'File Kosong',
-                              'Belum ada file yang dipilih.',
-                              snackPosition: SnackPosition.BOTTOM,
-                            );
-                          }
-                        },
-                      ),
-                      IconButton(
-                        onPressed: () {
-                          sakitController.hapusFile();
-                        },
-                        icon: Icon(Icons.delete),
-                      ),
-                    ],
-                  ),
+                  labelText: 'Tanggal Awal',
+                  suffixIcon: Icon(Icons.calendar_today),
                 ),
-                controller: sakitController.fileNameController,
-                onTap: () {},
+                onTap: () => cutiController.pickDate(context, true),
+                controller: cutiController.tanggalAwalController,
               ),
             ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: Get.width * 0.95,
+              child: TextFormField(
+                style: TextStyle(color: Colors.black),
+                readOnly: true,
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  labelText: 'Tanggal Akhir',
+                  suffixIcon: Icon(Icons.calendar_today),
+                ),
+                onTap: () => cutiController.pickDate(context, false),
+                controller: cutiController.tanggalAkhirController,
+              ),
+            ),
+            SizedBox(height: 20),
+            SizedBox(
+              width: Get.width * 0.95,
+              child: TextField(
+                maxLines: 5,
+                style: TextStyle(color: Colors.black),
+                decoration: InputDecoration(
+                  fillColor: Colors.white,
+                  labelText: 'Keterangan',
+                  hintText: 'Masukkan Keterangan',
+                ),
+                controller: cutiController.keteranganController,
+              ),
+            ),
+            SizedBox(height: 20),
 
             SizedBox(height: 200),
           ],
@@ -142,10 +155,10 @@ class CreateSakitView extends StatelessWidget {
             borderRadius: BorderRadius.circular(20),
           ),
           onPressed: () {
-            sakitController.simpanSakit();
+            cutiController.simpanCuti();
           },
           child: Obx(() {
-            if (sakitController.isLoading.value) {
+            if (cutiController.isLoading.value) {
               return CircularProgressIndicator();
             } else {
               return Text('Simpan', style: TextStyle(fontSize: 15));

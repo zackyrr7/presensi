@@ -50,6 +50,10 @@
 		<string>pdf</string>
 		<string>com.adobe.pdf</string>
 	</array>
+	<key>NSLocationWhenInUseUsageDescription</key>
+	<string>App ini membutuhkan akses lokasi untuk absen</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Aplikasi ini memerlukan akses ke kamera untuk mengambil foto.</string>
 
 </dict>
 </plist>

@@ -53,7 +53,9 @@ class GridContainer extends StatelessWidget {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed('/cuti');
+                    },
                     child: SizedBox(
                       height: Get.height * 0.08,
                       width: Get.height * 0.08,
