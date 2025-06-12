@@ -199,8 +199,9 @@ class LoginViews extends StatelessWidget {
                                       )
                                       : Text(
                                         'Login',
-                                        style: AppTextStyles.buttonColor(
-                                          context,
+                                        style: TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
                                         ),
                                       ),
                             ),

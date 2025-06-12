@@ -14,7 +14,53 @@ class LemburView extends StatelessWidget {
           'Lembur Pegawai',
           style: TextStyle(fontWeight: FontWeight.bold),
         ),
-        actions: [IconButton(onPressed: () {}, icon: Icon(Icons.filter_list))],
+        actions: [
+          IconButton(
+            onPressed: () {
+              List<String> namaBulan = [
+                'Januari',
+                'Februari',
+                'Maret',
+                'April',
+                'Mei',
+                'Juni',
+                'Juli',
+                'Agustus',
+                'September',
+                'Oktober',
+                'November',
+                'Desember',
+              ];
+              Get.defaultDialog(
+                title: 'Pilih Bulan',
+                content: SizedBox(
+                  height: Get.height * 0.7,
+                  width: Get.width * 0.8,
+                  child: ListView.builder(
+                    itemCount: namaBulan.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(namaBulan[index]),
+                        onTap: () {
+                          lemburController.bulan.value = (index + 1);
+                          Get.back();
+                          lemburController.getLembur();
+                        },
+                      );
+                    },
+                  ),
+                ),
+                cancel: Align(
+                  alignment: Alignment.bottomRight,
+                  child: ElevatedButton(onPressed: () {
+                    Get.back();
+                  }, child: Text('Batal')),
+                ),
+              );
+            },
+            icon: Icon(Icons.filter_list),
+          ),
+        ],
         centerTitle: true,
       ),
       body: Obx(() {
@@ -46,9 +92,12 @@ class LemburView extends StatelessWidget {
                           style: TextStyle(fontSize: 16),
                         ),
 
-                        ElevatedButton(onPressed: () {
-                          Get.toNamed('/lembur-detail',arguments: item);
-                        }, child: Text('Detail')),
+                        ElevatedButton(
+                          onPressed: () {
+                            Get.toNamed('/lembur-detail', arguments: item);
+                          },
+                          child: Text('Detail'),
+                        ),
                       ],
                     ),
                   ),

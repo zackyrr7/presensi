@@ -108,4 +108,43 @@ class LemburService {
       return {'success': false, 'message': 'An error occurred: $e'};
     }
   }
+
+  Future<Map<String, dynamic>> updateLembur(
+    int id,
+    int status,
+    String uraian_pekerjaan,
+  ) async {
+    try {
+      final box = GetStorage();
+      var token = box.read('token');
+
+      if (token == null) {
+        return {'success': false, 'message': 'Token tidak ditemukan'};
+      }
+
+      var response = await http.post(
+        Uri.parse('$url/lembur/update-lembur'),
+        headers: {
+          "Authorization": "Bearer $token",
+          "Content-Type": "application/json",
+        },
+        body: jsonEncode({
+          'id': id.toString(),
+          'status': status.toString(),
+          'uraian_pekerjaan': uraian_pekerjaan,
+        }),
+      );
+
+      if (response.statusCode == 200) {
+        var data = json.decode(response.body);
+        return data;
+      } else if (response.statusCode == 401) {
+        return {'success': 401, 'message': 'Sesi telah habis'};
+      } else {
+        return {'success': false, 'message': 'Terjadi kesalahan server'};
+      }
+    } catch (e) {
+      return {'success': false, 'message': 'An error occurred: $e'};
+    }
+  }
 }

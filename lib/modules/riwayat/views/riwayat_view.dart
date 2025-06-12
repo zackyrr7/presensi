@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:gopresent/constant.dart';
 import 'package:gopresent/modules/riwayat/controller/riwayat_hitung_controller.dart';
 import 'package:gopresent/modules/riwayat/widget/grid_riwayat.dart';
 
@@ -12,6 +13,7 @@ class RiwayatView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.transparent,
         title: Text(
@@ -22,6 +24,15 @@ class RiwayatView extends StatelessWidget {
             color: Theme.of(context).textTheme.bodyMedium?.color,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              riwayatHitungController.riwayat();
+              riwayatHitungController.riwayatHitung();
+            },
+            icon: Icon(Icons.refresh),
+          ),
+        ],
       ),
       body: Column(
         children: [
@@ -52,7 +63,12 @@ class RiwayatView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CircleAvatar(radius: 30),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(
+                                    '$urlFoto${'storage/uploads/profile/default.png'}',
+                                  ),
+                                ),
                                 SizedBox(width: 10),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -102,7 +118,12 @@ class RiwayatView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CircleAvatar(radius: 30),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(
+                                    '$urlFoto${'storage/uploads/profile/default.jpg'}',
+                                  ),
+                                ),
                                 SizedBox(width: 10),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -149,7 +170,12 @@ class RiwayatView extends StatelessWidget {
                               crossAxisAlignment: CrossAxisAlignment.center,
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: [
-                                CircleAvatar(radius: 30),
+                                CircleAvatar(
+                                  radius: 30,
+                                  backgroundImage: NetworkImage(
+                                    '$urlFoto${riwayatHitungController.listRiwayat[index].photo}',
+                                  ),
+                                ),
                                 SizedBox(width: 10),
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,

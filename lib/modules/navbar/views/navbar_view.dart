@@ -79,6 +79,7 @@ class MyNavbar extends StatelessWidget {
         ),
 
         floatingActionButton: FloatingActionButton(
+          backgroundColor: Theme.of(context).colorScheme.onPrimaryFixed,
           onPressed: () {
             // Aksi tombol tengah, bisa navigasi ke AbsenView
             Get.toNamed('/absen');
@@ -88,7 +89,7 @@ class MyNavbar extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: const [
-              Icon(Icons.camera_alt, color: Colors.white, size: 20),
+              Icon(Icons.camera_alt,  size: 20),
             ],
           ),
         ),

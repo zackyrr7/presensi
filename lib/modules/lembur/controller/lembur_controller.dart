@@ -13,7 +13,7 @@ class LemburController extends GetxController {
   var isLoading = false.obs;
   final LemburService _lemburService = LemburService();
   var lemburList = <LemburItem>[].obs;
-  var bulan = ''.obs;
+  var bulan = 0.obs;
   var selectedValue = 0.obs;
   var tanggal = Rxn<DateTime>();
   var mulai = Rxn<DateTime>();
@@ -286,7 +286,7 @@ class LemburController extends GetxController {
     isLoading.value = true;
 
     try {
-      var result = await _lemburService.getLembur(bulan.value);
+      var result = await _lemburService.getLembur(bulan.value.toString());
       if (result['status'] == true) {
         // Pastikan result['data'] sudah berupa JSON string atau Map
         // Jika data sudah Map/List, jangan decode ulang
@@ -359,14 +359,20 @@ class LemburController extends GetxController {
       var result = await _lemburService.hapusLembur(id);
 
       if (result['status'] == true) {
-        Get.snackbar(
-          'Berhasil',
-          'Data berhasil dihapus',
-          snackPosition: SnackPosition.BOTTOM,
-        );
-        getLembur();
-        Get.until((route) => Get.currentRoute == '/navbar');
-        Get.toNamed('/lembur');
+        Get.back(); // Tutup BottomSheet
+
+        Future.delayed(Duration(milliseconds: 200), () {
+          Get.snackbar(
+            'Berhasil',
+            'Data berhasil dihapus',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+
+          getLembur();
+
+          // Trik: Gunakan Get.offNamed() dengan transition zero
+          Get.offNamed('/lembur', arguments: null);
+        });
       } else if (result['success'] == 401) {
         Get.defaultDialog(
           title: 'Sesi Telah Habis',
@@ -378,6 +384,63 @@ class LemburController extends GetxController {
           },
         );
       } else {
+        Get.snackbar(
+          'Gagal',
+          result['message'] ?? 'Terjadi kesalahan',
+          snackPosition: SnackPosition.BOTTOM,
+        );
+      }
+    } catch (e) {
+      Get.snackbar('Error', 'Terjadi error: $e');
+    } finally {
+      isLoading.value = false;
+    }
+  }
+
+  Future<void> updateLembur(int id) async {
+    final uraian_pekerjaan = keteranganController.text;
+    final status = selectedValue.value;
+
+    try {
+      final result = await _lemburService.updateLembur(
+        id,
+        status,
+        uraian_pekerjaan,
+      );
+      if (result['status'] == true) {
+        Get.back(); // Tutup BottomSheet
+
+        Future.delayed(Duration(milliseconds: 200), () {
+          Get.snackbar(
+            'Berhasil',
+            'Data berhasil disimpan',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+
+          getLembur();
+
+          // Trik: Gunakan Get.offNamed() dengan transition zero
+          Get.offNamed('/lembur', arguments: null);
+        });
+
+        // Kosongkan form
+        tanggalController.clear();
+        mulaiController.clear();
+        selesaiController.clear();
+        keteranganController.clear();
+        pilihanController.clear();
+      } else if (result['success'] == 401) {
+        Get.defaultDialog(
+          title: 'Sesi Telah Habis',
+          middleText: 'Login Kembali',
+          textConfirm: 'OK',
+          confirmTextColor: Get.theme.textTheme.bodyMedium?.color,
+          onConfirm: () {
+            resetController.deleteSession();
+          },
+        );
+      } else {
+        print(result);
         Get.snackbar(
           'Gagal',
           result['message'] ?? 'Terjadi kesalahan',
@@ -424,14 +487,20 @@ class LemburController extends GetxController {
       );
 
       if (result['status'] == true) {
-        Get.snackbar(
-          'Berhasil',
-          result['message'] ?? 'Data berhasil disimpan',
-          snackPosition: SnackPosition.BOTTOM,
-        );
-        getLembur();
-        Get.until((route) => Get.currentRoute == '/navbar');
-        Get.toNamed('/lembur');
+        Get.back(); // Tutup BottomSheet
+
+        Future.delayed(Duration(milliseconds: 200), () {
+          Get.snackbar(
+            'Berhasil',
+            'Data berhasil dihapus',
+            snackPosition: SnackPosition.BOTTOM,
+          );
+
+          getLembur();
+
+          // Trik: Gunakan Get.offNamed() dengan transition zero
+          Get.offNamed('/lembur', arguments: null);
+        });
 
         // Kosongkan form
         tanggalController.clear();

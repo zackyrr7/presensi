@@ -3,6 +3,7 @@ import 'package:gopresent/modules/auth/controllers/reset_controller.dart';
 
 import 'package:gopresent/modules/home/controllers/home_controller.dart';
 import 'package:gopresent/modules/home/controllers/notification_controller.dart';
+import 'package:gopresent/modules/profil/controller/profile_controller.dart';
 import 'package:gopresent/modules/riwayat/controller/riwayat_hitung_controller.dart';
 
 class Homebinding extends Bindings {
@@ -12,5 +13,6 @@ class Homebinding extends Bindings {
     Get.put<HomeController>((HomeController()));
     Get.put<RiwayatHitungController>((RiwayatHitungController()));
     Get.put<NotificationController>((NotificationController()));
+    Get.put<ProfileController>((ProfileController()));
   }
 }

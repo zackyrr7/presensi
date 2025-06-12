@@ -27,7 +27,7 @@ class ListRiwayat {
     return ListRiwayat(
       id: json['idpegawai'],
       name: json['namapegawai'],
-      photo: json['foto'],
+      photo: json['fotomasuk'],
       jamMasuk: json['jammasuk'] ?? '',
       jamKeluar: json['jampulang'] ?? '',
       tanggal: json['tanggal'],

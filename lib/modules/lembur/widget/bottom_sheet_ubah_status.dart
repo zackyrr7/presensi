@@ -8,13 +8,13 @@ class BottomSheetUbahStatus extends StatelessWidget {
   final int index;
   final dynamic detail;
 
-  final TextEditingController _uraianController = TextEditingController();
+ 
   final LemburController lemburController = Get.find<LemburController>();
 
   @override
   Widget build(BuildContext context) {
     // Isi controller dengan data lama
-    _uraianController.text = detail?.uraianPekerjaan ?? '';
+    lemburController.keteranganController.text = detail?.uraianPekerjaan ?? '';
     lemburController.selectedValue.value = detail.status ?? 0;
 
     return Container(
@@ -55,7 +55,7 @@ class BottomSheetUbahStatus extends StatelessWidget {
             ),
             const SizedBox(height: 8),
             TextField(
-              controller: _uraianController,
+              controller: lemburController.keteranganController,
               maxLines: 3,
               decoration: InputDecoration(
                 hintText: 'Masukkan uraian pekerjaan',
@@ -89,7 +89,9 @@ class BottomSheetUbahStatus extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      lemburController.updateLembur(detail?.id);
+                    },
                     child: const Text(
                       'Simpan',
                       style: TextStyle(color: Colors.white),
