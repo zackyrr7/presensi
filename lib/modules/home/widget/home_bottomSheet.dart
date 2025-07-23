@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-
 class HomeBottomSheet extends StatelessWidget {
-  const HomeBottomSheet({
-    super.key,
-  });
+  const HomeBottomSheet({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      color:
-          Theme.of(context).scaffoldBackgroundColor,
+      color: Theme.of(context).scaffoldBackgroundColor,
       child: Column(
         // mainAxisAlignment: MainAxisAlignment.center,
         // crossAxisAlignment:
@@ -24,29 +20,21 @@ class HomeBottomSheet extends StatelessWidget {
               Align(
                 alignment: Alignment.centerLeft,
                 child: Padding(
-                  padding: const EdgeInsets.all(
-                    8.0,
-                  ),
+                  padding: const EdgeInsets.all(8.0),
                   child: IconButton(
                     onPressed: () {
                       Get.back();
                     },
-                    icon: Icon(
-                      Icons.cancel,
-                      size: 30,
-                    ),
+                    icon: Icon(Icons.cancel, size: 30),
                   ),
                 ),
               ),
-    
+
               // Judul di tengah
               Center(
                 child: Text(
                   "Semua Menu",
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
-                  ),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
                 ),
               ),
             ],
@@ -56,14 +44,11 @@ class HomeBottomSheet extends StatelessWidget {
             // height: Get.height * 0.23,
             // width: Get.width,
             child: Column(
-              crossAxisAlignment:
-                  CrossAxisAlignment.center,
-              mainAxisAlignment:
-                  MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       children: [
@@ -72,14 +57,10 @@ class HomeBottomSheet extends StatelessWidget {
                             Get.toNamed('/izin');
                           },
                           child: SizedBox(
-                            height:
-                                Get.height * 0.08,
-                            width:
-                                Get.height * 0.08,
-    
-                            child: Image.asset(
-                              "assets/icon/izin.png",
-                            ),
+                            height: Get.height * 0.08,
+                            width: Get.height * 0.08,
+
+                            child: Image.asset("assets/icon/izin.png"),
                           ),
                         ),
                         Text('Izin'),
@@ -92,14 +73,10 @@ class HomeBottomSheet extends StatelessWidget {
                             Get.toNamed('/sakit');
                           },
                           child: SizedBox(
-                            height:
-                                Get.height * 0.08,
-                            width:
-                                Get.height * 0.08,
-    
-                            child: Image.asset(
-                              "assets/icon/sakit.png",
-                            ),
+                            height: Get.height * 0.08,
+                            width: Get.height * 0.08,
+
+                            child: Image.asset("assets/icon/sakit.png"),
                           ),
                         ),
                         Text('Sakit'),
@@ -112,14 +89,10 @@ class HomeBottomSheet extends StatelessWidget {
                             Get.toNamed('/cuti');
                           },
                           child: SizedBox(
-                            height:
-                                Get.height * 0.08,
-                            width:
-                                Get.height * 0.08,
-    
-                            child: Image.asset(
-                              "assets/icon/cuti.png",
-                            ),
+                            height: Get.height * 0.08,
+                            width: Get.height * 0.08,
+
+                            child: Image.asset("assets/icon/cuti.png"),
                           ),
                         ),
                         Text('Cuti'),
@@ -128,41 +101,36 @@ class HomeBottomSheet extends StatelessWidget {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed('/todo');
+                          },
                           child: SizedBox(
-                            height:
-                                Get.height * 0.08,
-                            width:
-                                Get.height * 0.08,
-    
-                            child: Image.asset(
-                              "assets/icon/task.png",
-                            ),
+                            height: Get.height * 0.08,
+                            width: Get.height * 0.08,
+
+                            child: Image.asset("assets/icon/task.png"),
                           ),
                         ),
-                        Text('Task'),
+                        Text('Todo List'),
                       ],
                     ),
                   ],
                 ),
                 SizedBox(height: 8),
                 Row(
-                  mainAxisAlignment:
-                      MainAxisAlignment.spaceEvenly,
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed('/amal');
+                          },
                           child: SizedBox(
-                            height:
-                                Get.height * 0.08,
-                            width:
-                                Get.height * 0.08,
-    
-                            child: Image.asset(
-                              "assets/icon/amal-yaumi.png",
-                            ),
+                            height: Get.height * 0.08,
+                            width: Get.height * 0.08,
+
+                            child: Image.asset("assets/icon/amal-yaumi.png"),
                           ),
                         ),
                         Text('Amal Yaumi'),
@@ -171,34 +139,30 @@ class HomeBottomSheet extends StatelessWidget {
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed('/lapker');
+                          },
                           child: SizedBox(
-                            height:
-                                Get.height * 0.08,
-                            width:
-                                Get.height * 0.08,
-    
-                            child: Image.asset(
-                              "assets/icon/lapker.png",
-                            ),
+                            height: Get.height * 0.08,
+                            width: Get.height * 0.08,
+
+                            child: Image.asset("assets/icon/lapker.png"),
                           ),
                         ),
-                        Text('Aktivitas'),
+                        Text('Lap. Kerja'),
                       ],
                     ),
                     Column(
                       children: [
                         GestureDetector(
-                          onTap: () {},
+                          onTap: () {
+                            Get.toNamed('/gaji');
+                          },
                           child: SizedBox(
-                            height:
-                                Get.height * 0.08,
-                            width:
-                                Get.height * 0.08,
-    
-                            child: Image.asset(
-                              "assets/icon/slip.png",
-                            ),
+                            height: Get.height * 0.08,
+                            width: Get.height * 0.08,
+
+                            child: Image.asset("assets/icon/slip.png"),
                           ),
                         ),
                         Text('Slip Gaji'),
@@ -211,16 +175,9 @@ class HomeBottomSheet extends StatelessWidget {
                             Get.bottomSheet(
                               Container(
                                 color:
-                                    Theme.of(
-                                      context,
-                                    ).scaffoldBackgroundColor,
+                                    Theme.of(context).scaffoldBackgroundColor,
                                 child: Column(
-                                  children: [
-                                    Text(
-                                      "Semua Menu",
-                                    ),
-                                    Container(),
-                                  ],
+                                  children: [Text("Semua Menu"), Container()],
                                 ),
                               ),
                             );
@@ -230,13 +187,9 @@ class HomeBottomSheet extends StatelessWidget {
                               Get.toNamed('/lembur');
                             },
                             child: SizedBox(
-                              height:
-                                  Get.height * 0.08,
-                              width:
-                                  Get.height * 0.08,
-                              child: Image.asset(
-                                "assets/icon/lembur.png",
-                              ),
+                              height: Get.height * 0.08,
+                              width: Get.height * 0.08,
+                              child: Image.asset("assets/icon/lembur.png"),
                             ),
                           ),
                         ),

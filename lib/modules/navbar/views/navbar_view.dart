@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:gopresent/modules/home/views/home_view.dart';
+import 'package:gopresent/modules/home/views/today_absen.dart';
 import 'package:gopresent/modules/navbar/views/test.dart';
 import 'package:gopresent/modules/profil/views/profil_view.dart';
 import 'package:gopresent/modules/riwayat/views/riwayat_view.dart';
@@ -14,16 +15,16 @@ class MyNavbar extends StatelessWidget {
     HomeView(),
     RiwayatView(),
     const SizedBox(), // kosong karena tombol tengah (Absen)
-    const TestView(),
+     TodayAbsenView(),
     ProfilView(),
   ];
 
-  final List<String> _labels = ['Home', 'Riwayat', '', 'Lapker', 'Profil'];
+  final List<String> _labels = ['Home', 'Riwayat', '', 'Hari ini', 'Profil'];
   final List<IconData> _icons = [
     Icons.home,
     Icons.history,
     Icons.qr_code,
-    Icons.schedule,
+    Icons.calendar_month,
     Icons.person,
   ];
 

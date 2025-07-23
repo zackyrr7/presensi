@@ -69,7 +69,9 @@ class GridContainer extends StatelessWidget {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed('todo');
+                    },
                     child: SizedBox(
                       height: Get.height * 0.08,
                       width: Get.height * 0.08,
@@ -77,7 +79,7 @@ class GridContainer extends StatelessWidget {
                       child: Image.asset("assets/icon/task.png"),
                     ),
                   ),
-                  Text('Task'),
+                  Text('Todo List'),
                 ],
               ),
             ],
@@ -89,7 +91,9 @@ class GridContainer extends StatelessWidget {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed('/amal');
+                    },
                     child: SizedBox(
                       height: Get.height * 0.08,
                       width: Get.height * 0.08,
@@ -103,7 +107,9 @@ class GridContainer extends StatelessWidget {
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed('/lapker');
+                    },
                     child: SizedBox(
                       height: Get.height * 0.08,
                       width: Get.height * 0.08,
@@ -111,13 +117,15 @@ class GridContainer extends StatelessWidget {
                       child: Image.asset("assets/icon/lapker.png"),
                     ),
                   ),
-                  Text('Aktivitas'),
+                  Text('Lap. Kerja'),
                 ],
               ),
               Column(
                 children: [
                   GestureDetector(
-                    onTap: () {},
+                    onTap: () {
+                      Get.toNamed('/gaji');
+                    },
                     child: SizedBox(
                       height: Get.height * 0.08,
                       width: Get.height * 0.08,

@@ -1,25 +1,33 @@
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:gopresent/bindings/AbsenBinding.dart';
+import 'package:gopresent/bindings/AmalBinding.dart';
 import 'package:gopresent/bindings/AuthBinding.dart';
 import 'package:gopresent/bindings/CutiBinding.dart';
+import 'package:gopresent/bindings/GajiBinding.dart';
 import 'package:gopresent/bindings/HomeBinding.dart';
 import 'package:gopresent/bindings/IzinBinding.dart';
+import 'package:gopresent/bindings/LapkerBinding.dart';
 import 'package:gopresent/bindings/LemburBinding.dart';
 import 'package:gopresent/bindings/SakitBinding.dart';
+import 'package:gopresent/bindings/TodoBinding.dart';
 import 'package:gopresent/modules/absen/views/absen_create_view.dart';
 import 'package:gopresent/modules/absen/views/absen_view.dart';
+import 'package:gopresent/modules/amal/view/amal_view.dart';
 import 'package:gopresent/modules/auth/controllers/login_controller.dart';
 import 'package:gopresent/modules/auth/views/login_views.dart';
 import 'package:gopresent/modules/cuti/view/create_cuti_view.dart';
 import 'package:gopresent/modules/cuti/view/cuti_detail_view.dart';
 import 'package:gopresent/modules/cuti/view/cuti_view.dart';
+import 'package:gopresent/modules/gaji/view/slip_gaji_view.dart';
 import 'package:gopresent/modules/home/views/notification_detail.dart';
 import 'package:gopresent/modules/home/views/notification_view.dart';
 import 'package:gopresent/modules/home/views/today_absen.dart';
 import 'package:gopresent/modules/izin/view/create_izin_view.dart';
 import 'package:gopresent/modules/izin/view/izin_detail_view.dart';
 import 'package:gopresent/modules/izin/view/izin_view.dart';
+import 'package:gopresent/modules/lapker/view/lapker_detail_view.dart';
+import 'package:gopresent/modules/lapker/view/lapker_view.dart';
 import 'package:gopresent/modules/lembur/view/create_lembur_view.dart';
 import 'package:gopresent/modules/lembur/view/lembur_detail_view.dart';
 import 'package:gopresent/modules/lembur/view/lembur_view.dart';
@@ -28,6 +36,7 @@ import 'package:gopresent/modules/riwayat/views/riwayat_view.dart';
 import 'package:gopresent/modules/sakit/view/create_sakit_view.dart';
 import 'package:gopresent/modules/sakit/view/detail_sakit_view.dart';
 import 'package:gopresent/modules/sakit/view/sakit_view.dart';
+import 'package:gopresent/modules/todolist/view/todolist_view.dart';
 
 part 'app_routes.dart';
 
@@ -84,5 +93,29 @@ class AppPages {
     ),
     GetPage(name: Routes.LEMBURDETAIL, page: () => LemburDetailView()),
     GetPage(name: Routes.CREATELEMBUR, page: () => CreateLemburView()),
+
+    //Slip Gaji
+    GetPage(
+      name: Routes.GAJI,
+      page: () => SlipGajiView(),
+      binding: Gajibinding(),
+    ),
+    //AMAL
+    GetPage(name: Routes.AMAL, page: () => AmalView(), binding: AmalBinding()),
+
+    //Todo
+    GetPage(
+      name: Routes.TODO,
+      page: () => TodolistView(),
+      binding: Todobinding(),
+    ),
+
+    // Lapker
+    GetPage(
+      name: Routes.LAPKER,
+      page: () => LapkerView(),
+      binding: Lapkerbinding(),
+    ),
+    GetPage(name: Routes.LAPKERDETAIL, page: () => LapkerDetailView()),
   ];
 }

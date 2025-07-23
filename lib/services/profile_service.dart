@@ -22,7 +22,7 @@ class ProfileService {
           "Content-Type": "application/json",
         },
       );
-
+    
       if (response.statusCode == 200) {
         var data = json.decode(response.body);
         return data;

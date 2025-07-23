@@ -36,6 +36,7 @@ class ProfileController extends GetxController {
     isLoading.value = true;
     try {
       var result = await _profileService.getProfile();
+      
       if (result['status'] == true) {
         detailPegawai.value = DetailPegawai.fromJson(result['data']);
       } else if (result['success'] == 401) {
@@ -57,6 +58,7 @@ class ProfileController extends GetxController {
       }
     } catch (e) {
       Get.snackbar('Error', 'Terjadi error: $e');
+     
     } finally {
       isLoading.value = false;
     }

@@ -21,6 +21,11 @@ class Routes {
   static const LEMBUR = '/lembur';
   static const LEMBURDETAIL = '/lembur-detail';
   static const CREATELEMBUR = '/lembur-create';
+  static const GAJI = '/gaji';
+  static const AMAL = '/amal';
+  static const TODO = '/todo';
+  static const LAPKER = '/lapker';
+  static const LAPKERDETAIL = '/lapker-detail';
 
 
 }

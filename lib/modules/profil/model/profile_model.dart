@@ -18,7 +18,7 @@ class DetailPegawai {
   final int idPerusahaan;
   final int isActive;
   final String rekening;
-  final int? idBank;
+  final String idBank;
   final int rotateShift;
   final int idDivisi;
 
@@ -42,7 +42,7 @@ class DetailPegawai {
     required this.idPerusahaan,
     required this.isActive,
     required this.rekening,
-    this.idBank,
+    required this.idBank,
     required this.rotateShift,
     required this.idDivisi,
   });

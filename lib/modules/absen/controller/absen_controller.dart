@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'dart:typed_data';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:gopresent/modules/auth/controllers/reset_controller.dart';
@@ -75,7 +76,11 @@ class AbsenController extends GetxController {
     isMockLocation.value = position.isMocked;
 
     if (isMockLocation.value) {
-      Get.snackbar('Peringatan!!', 'Anda Terdeteksi menggunakan lokasi palsu');
+      Get.snackbar(
+        'Peringatan!!',
+        'Anda Terdeteksi menggunakan lokasi palsu',
+        backgroundColor: Colors.redAccent[100],
+      );
       return;
     }
 
